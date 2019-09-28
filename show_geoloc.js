@@ -15,7 +15,7 @@ function getLocation() {
         // to the first parameter. Here the information can be processed as needed.
         // If the locating of the device was unsuccessful, a fallback error handling function is may be called.
         zoom = 10;
-        navigator.geolocation.getCurrentPosition(showPosition, showError);
+        navigator.geolocation.getCurrentPosition(showPosition, showError, {enableHighAccuracy: false});
     } else {
         geocoordInfoField.innerHTML = "Geolocation is not supported by this browser.";
     }
@@ -38,6 +38,15 @@ function stopTracking() {
     if (navigator.geolocation) {
         // stops the tracking with the ID trackingId
         navigator.geolocation.clearWatch(trackingId);
+    } else {
+        geocoordInfoField.innerHTML = "Geolocation is not supported by this browser.";
+    }
+}
+
+function getLocationWithHighAccuracy() {
+    if (navigator.geolocation) {
+        zoom = 10;
+        navigator.geolocation.getCurrentPosition(showPosition, showError, {enableHighAccuracy: true});
     } else {
         geocoordInfoField.innerHTML = "Geolocation is not supported by this browser.";
     }
