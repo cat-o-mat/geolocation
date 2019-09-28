@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Geolocation API</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.0.0/css/ol.css" type="text/css">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.0.0/css/ol.css"
+          type="text/css">
     <style>
         #map {
             height: 400px;
@@ -11,16 +13,15 @@
         }
     </style>
     <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.0.0/build/ol.js"></script>
-
 </head>
 <body>
-<button onclick="getLocation()">Show my Location</button>
-<p id="geolocation"></p>
 
+<button onclick="getLocation()">Show my Location</button>
+<p id="info"></p>
 <div id="map" class="map"></div>
 
 <!--script-tag needs to be right before the /body-tag,-->
-<!--so all elements are loaded before the script runs. This way the script is able to find the "geolocation" id-->
+<!--so all elements are loaded before the script runs. This way the script is able to find html elements-->
 <script src="show_geoloc.js"></script>
 
 </body>
