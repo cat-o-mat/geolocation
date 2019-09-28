@@ -4,6 +4,7 @@ let map = document.getElementById("map");
 // Cet default coords (used before user data is available)
 let lat = 37.233333;
 let lon = -115.808333;
+let trackingId;
 
 function getLocation() {
     // Check if geolocation is supported by the browser
@@ -15,7 +16,27 @@ function getLocation() {
     } else {
         geocoordInfoField.innerHTML = "Geolocation is not supported by this browser.";
     }
+}
 
+// Tracks location as device moves
+function trackLocation() {
+    // Check if geolocation is supported by the browser
+    if (navigator.geolocation) {
+        // returns the tracking id used to stop the tracking
+        trackingId = navigator.geolocation.watchPosition(showPosition, showError);
+    } else {
+        geocoordInfoField.innerHTML = "Geolocation is not supported by this browser.";
+    }
+}
+
+function stopTracking() {
+    // Check if geolocation is supported by the browser
+    if (navigator.geolocation) {
+        // stops the tracking with the ID trackingId
+        navigator.geolocation.clearWatch(trackingId);
+    } else {
+        geocoordInfoField.innerHTML = "Geolocation is not supported by this browser.";
+    }
 }
 
 // A function that prints out the longitude and latitude and shows the location on a map
