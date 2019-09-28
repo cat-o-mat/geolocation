@@ -5,6 +5,8 @@ let map = document.getElementById("map");
 let lat = 37.233333;
 let lon = -115.808333;
 let trackingId;
+// setting default zoom value
+let zoom = 10;
 
 function getLocation() {
     // Check if geolocation is supported by the browser
@@ -12,6 +14,7 @@ function getLocation() {
         // If the locating of the device was successful, the function returns a position-object with the coordinates
         // to the first parameter. Here the information can be processed as needed.
         // If the locating of the device was unsuccessful, a fallback error handling function is may be called.
+        zoom = 10;
         navigator.geolocation.getCurrentPosition(showPosition, showError);
     } else {
         geocoordInfoField.innerHTML = "Geolocation is not supported by this browser.";
@@ -23,6 +26,7 @@ function trackLocation() {
     // Check if geolocation is supported by the browser
     if (navigator.geolocation) {
         // returns the tracking id used to stop the tracking
+        zoom = 17;
         trackingId = navigator.geolocation.watchPosition(showPosition, showError);
     } else {
         geocoordInfoField.innerHTML = "Geolocation is not supported by this browser.";
@@ -68,7 +72,7 @@ function showPosition(position) {
         // defining the center and zoom of the map
         view: new ol.View({
             center: ol.proj.fromLonLat([lon, lat]),
-            zoom: 10
+            zoom: zoom
         })
     });
 
