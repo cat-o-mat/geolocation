@@ -15,7 +15,7 @@ function getLocation() {
         // to the first parameter. Here the information can be processed as needed.
         // If the locating of the device was unsuccessful, a fallback error handling function is may be called.
         zoom = 10;
-        navigator.geolocation.getCurrentPosition(showPosition, showError, {enableHighAccuracy: false});
+        navigator.geolocation.getCurrentPosition(showPosition, showError, {enableHighAccuracy: true});
     } else {
         geocoordInfoField.innerHTML = "Geolocation is not supported by this browser.";
     }
@@ -27,7 +27,7 @@ function trackLocation() {
     if (navigator.geolocation) {
         // returns the tracking id used to stop the tracking
         zoom = 17;
-        trackingId = navigator.geolocation.watchPosition(showPosition, showError);
+        trackingId = navigator.geolocation.watchPosition(showPosition, showError, {maximumAge: Infinity});
     } else {
         geocoordInfoField.innerHTML = "Geolocation is not supported by this browser.";
     }
@@ -56,6 +56,7 @@ function getLocationWithHighAccuracy() {
 function showPosition(position) {
     lat = position.coords.latitude;
     lon = position.coords.longitude;
+    var timestamp = new Date(position.timestamp);
 
     geocoordInfoField.innerHTML = "Latitude: " + lat +
         "<br>Longitude: " + lon +
@@ -64,7 +65,7 @@ function showPosition(position) {
         "<br>Altitude accuracy: " + position.coords.altitudeAccuracy +
         "<br>Heading: " + position.coords.heading +
         "<br>Speed: " + position.coords.speed +
-        "<br>Timestamp: " + position.timestamp;
+        "<br>Timestamp: " + timestamp.toLocaleString();
 
     document.getElementById("map").innerText = "";
 
