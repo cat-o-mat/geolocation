@@ -1,31 +1,402 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <title>Geolocation API</title>
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.0.0/css/ol.css"
           type="text/css">
-    <style>
-        #map {
-            height: 400px;
-            width: 70%;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="node_modules/assets/css/map.css">
+    <link rel="stylesheet" type="text/css" href="node_modules/assets/css/global.css">
     <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.0.0/build/ol.js"></script>
 </head>
 <body>
 
-<button onclick="getLocation()">Show my location</button>
-<button onclick="trackLocation()">Track my location</button>
-<button onclick="stopTracking()">Stop tracking my location</button>
-<button onclick="getLocationWithHighAccuracy()">Get location with high accuracy</button>
-<p id="info"></p>
-<div id="map" class="map"></div>
+<div id="container" class="page">
+</div>
 
-<!--script-tag needs to be right before the /body-tag,-->
-<!--so all elements are loaded before the script runs. This way the script is able to find html elements-->
-<script src="show_geoloc.js"></script>
+<div id="slides">
+    <div class="slide">
+        <div class="titletop">
+            <h1>Geolocation API
+                am Beispiel der W3C Geolocation API</h1>
+        </div>
+        <div class="titlebelow">
+            Boyana Stefanova
+        </div>
+        <div class="titlebelow" style="margin-top: 3vw;">
+            Fachhochschule Wedel<br>
+            Prof. Dr. Michael Predeschly
+        </div>
+    </div>
 
+    <!--  INHALT  -->
+    <div class="slide">
+        <h1>Inhalt</h1>
+        <ul>
+            <li>Historischer Hintergrund</li>
+            <li>
+                Technischer Hintergrund
+                <ul>
+                    <li>Trilateration</li>
+                    <li>Standortermittlungsmethoden</li>
+                </ul>
+            </li>
+            <li>
+                Datenschutz
+                <ul>
+                    <li>Datenschutz W3C</li>
+                    <li>DSGVO</li>
+                    <li>Sicherer Kontext</li>
+                </ul>
+            </li>
+            <li>Umsetzung</li>
+        </ul>
+    </div>
+    <!-- HISTORISCHER HINTERGRUND -->
+    <div class="slide">
+        <h1>Historischer Hintergrund</h1>
+        <ul class="imgs">
+            <li>
+                <div class="pic">
+                    <img src="node_modules/assets/imgs/compas.png"/>
+                </div>
+                <div class="src">
+                    Kompass<br>
+                    <a href="https://imgbin.com/png/NQba23WT">https://imgbin.com/png/NQba23WT</a>, 17.11.2019
+                </div>
+            </li>
+            <li>
+                <div class="pic">
+                    <img src="node_modules/assets/imgs/kamal.png"/>
+                </div>
+                <div class="src">
+                    Kamal<br>
+                    <a href="https://de.wikipedia.org/wiki/Kamal_(Astronomie)#/media/Datei:Kamal_Polaris.png">https://de.wikipedia.org/wiki/Kamal_(Astronomie)#/media/Datei:Kamal_Polaris.png</a>, 17.11.2019
+                </div>
+            </li>
+            <li>
+                <div class="pic">
+                    <img src="node_modules/assets/imgs/Jakobsstab.svg.png"/>
+                </div>
+                <div class="src">
+                    Jakobsstab<br>
+                    <a href="https://de.wikipedia.org/wiki/Datei:Jakobsstab_alt.svg">https://de.wikipedia.org/wiki/Datei:Jakobsstab_alt.svg</a>, 17.11.2019
+                </div>
+            </li>
+            <li>
+                <div class="pic">
+                    <img src="node_modules/assets/imgs/sextant.png"/>
+                </div>
+                <div class="src">
+                    Sextant<br>
+                    <a href="https://imgbin.com/png/NQba23WT">https://imgbin.com/png/NQba23WT</a>, 17.11.2019
+                </div>
+            </li>
+            <li>
+                <div class="pic">
+                    <img src="node_modules/assets/imgs/sputnik.png"/>
+                </div>
+                <div class="src">
+                    Sputnik <br>
+                    <a href="https://imgbin.com/png/bEikyVSa">https://imgbin.com/png/bEikyVSa</a>, 17.11.2019
+                </div>
+            </li>
+            <li>
+                <div class="pic">
+                    <img src="node_modules/assets/imgs/gps-satellite.png"/>
+                </div>
+                <div class="src">
+                    GPS-Satellit<br>
+                    <a href="https://imgbin.com/png/BpfkzpAM">https://imgbin.com/png/BpfkzpAM</a>, 17.11.2019
+                </div>
+            </li>
+        </ul>
+    </div>
+    <!-- TRILATERATION -->
+    <div class="slide">
+        <h1>Trilateration</h1>
+        <ul class="imgs | vertical_img_flow">
+            <li>
+                <div class="pic">
+                    <img src="node_modules/assets/imgs/trilateration.png"/>
+                </div>
+                <div class="src">
+                    Trilateration<br>
+                    <a href="https://imgbin.com/png/JxbFmtxw">https://imgbin.com/png/JxbFmtxw</a>, 04.11.2019
+                </div>
+            </li>
+            <li>
+                <div class="pic">
+                    <img src="node_modules/assets/imgs/formel.png"/>
+                </div>
+            </li>
+            <li>
+                <div class="pic">
+                    <img src="node_modules/assets/imgs/tri_eins.png"/>
+                </div>
+                <div class="src">
+                    Trilateration mit einem Satelliten<br>
+                    <a href="https://imgbin.com/download-png/JR3Rb8RX">https://imgbin.com/download-png/JR3Rb8RX</a>, 12.11.2019
+                </div>
+            </li>
+            <li>
+                <div class="pic">
+                    <img src="node_modules/assets/imgs/tri_2.png"/>
+                </div>
+                <div class="src">
+                    Trilateration mit zwei Satelliten
+                </div>
+            </li>
+            <li>
+                <div class="pic">
+                    <img src="node_modules/assets/imgs/tri_dreii.png"/>
+                </div>
+                <div class="src">
+                    Trilateration mit drei Satelliten
+                </div>
+            </li>
+            <li>
+                <div class="pic">
+                    <img src="node_modules/assets/imgs/trilateration-inter.png"/>
+                </div>
+                <div class="src">
+                    Trilateration mit nicht eindeutigen Messdaten <br>
+                    <a href="https://ddknav.com/help-gps/">https://ddknav.com/help-gps/</a>, 14.11.2019
+                </div>
+            </li>
+        </ul>
+    </div>
+    <!--  TECHNISCHER HINTERGRUND  -->
+    <div class="slide">
+        <h1>Technischer Hintergrund</h1>
+        <ul class="list">
+            <li>
+                Standortermittlung mithilfe von GPS<br>
+                <img src="node_modules/assets/imgs/trilateration.png">
+                <div class="src">
+                    <a href="https://imgbin.com/png/JxbFmtxw">https://imgbin.com/png/JxbFmtxw</a>, 04.11.2019
+                </div>
+            </li>
+            <li>
+                Standortermittlung mithilfe von IP-Adressen<br>
+                <img src="node_modules/assets/imgs/database.png" width="450" height="503">
+                <div class="src">
+                    <a href="https://imgbin.com/png/Qnc5h908">https://imgbin.com/png/Qnc5h908</a>, 18.11.2019
+                </div>
+            </li>
+            <li>
+                Standortermittlung mithilfe von Mobilfunk<br>
+                <img src="node_modules/assets/imgs/tower-2.jpg">
+                <div class="src">
+                    <a href="https://wrongfulconvictionsblog.org/2012/06/01/cell-tower-triangulation-how-it-works/">https://wrongfulconvictionsblog.org/2012/06/01/cell-tower-triangulation-how-it-works/</a>, 07.11.2019
+                </div>
+            </li>
+            <li>
+                Standortermittlung mithilfe von WLAN-Access-Points und RSS<br/>
+                <img src="node_modules/assets/imgs/rss.png" width="400" height="400">
+                <div class="src">
+                    <a href="https://imgbin.com/png/wmDzsSuQ">https://imgbin.com/png/wmDzsSuQ</a>, 18.11.2019
+                </div>
+            </li>
+        </ul>
+    </div>
+    <!-- DATENSCHUTZ  -->
+    <div class="slide">
+        <h1>Datenschutz</h1>
+        <ul>
+            <li>W3C Datenschutzbestimmungen</li>
+            <li>DSGVO</li>
+        </ul>
+    </div>
+    <!-- SICHERER KONTEXT -->
+    <div class="slide">
+        <h1>Browserunterstützung und sicherer Kontext</h1>
+        <ul>
+            <li>
+                Browserunterstützung<br>
+                <style type="text/css">
+                    .tg {
+                        border-collapse: collapse;
+                        border-spacing: 0;
+                    }
+
+                    .tg td {
+                        font-family: Arial, sans-serif;
+                        font-size: 25px;
+                        padding: 10px 5px;
+                        border-style: solid;
+                        border-width: 1px;
+                        overflow: hidden;
+                        word-break: normal;
+                        border-color: black;
+                    }
+
+                    .tg th {
+                        font-family: Arial, sans-serif;
+                        font-size: 25px;
+                        font-weight: normal;
+                        padding: 10px 5px;
+                        border-style: solid;
+                        border-width: 1px;
+                        overflow: hidden;
+                        word-break: normal;
+                        border-color: black;
+                    }
+
+                    .tg .tg-baqh {
+                        text-align: center;
+                        vertical-align: top
+                    }
+                </style>
+                <table class="tg">
+                    <tr>
+                        <th class="tg-baqh"></th>
+                        <th class="tg-baqh">Chrome</th>
+                        <th class="tg-baqh">IE / Edge</th>
+                        <th class="tg-baqh">Firefox</th>
+                        <th class="tg-baqh">Safari</th>
+                        <th class="tg-baqh">Opera</th>
+                    </tr>
+                    <tr>
+                        <td class="tg-baqh">unsicherer Kontext</td>
+                        <td class="tg-baqh">5.0</td>
+                        <td class="tg-baqh">9.0</td>
+                        <td class="tg-baqh">3.5</td>
+                        <td class="tg-baqh">5.0</td>
+                        <td class="tg-baqh">16.0</td>
+                    </tr>
+                    <tr>
+                        <td class="tg-baqh">sicherer Kontext</td>
+                        <td class="tg-baqh">55</td>
+                        <td class="tg-baqh">76 (Edge)</td>
+                        <td class="tg-baqh">55</td>
+                        <td class="tg-baqh">10</td>
+                        <td class="tg-baqh">39</td>
+                    </tr>
+                </table>
+            </li>
+            <li>
+                Unter dem Begriff "sicherer Kontext" versteht man
+                verschlüsselte Verbindungen wie HTTPS, FTPS oder auch lokale Verbindungen
+                wie zum Beispiel file:/// oder http://localhost.
+            </li>
+            <li>
+                Früher: unverschlüsselte Übertragung der Standortdaten
+            </li>
+            <li>
+                Heute: sicherer Kontext notwendig
+            </li>
+        </ul>
+    </div>
+
+    <!-- UMSETZUNG -->
+    <div class="slide">
+        <h1>Umsetzung</h1>
+        <ul>
+            <li>Navigator
+                <p>
+                <div class="code">partial interface Navigator {<br>
+                    &nbsp;[SameObject] readonly attribute Geolocation geolocation;<br>
+                    };
+                </div>
+                </p>
+            </li>
+            <li>GeolocationPosition
+                <p>
+                <div class="code">
+                    interface GeolocationPosition {<br>
+                    &nbsp;readonly attribute GeolocationCoordinates coords;<br>
+                    &nbsp;readonly attribute DOMTimeStamp timestamp;<br>
+                    };
+                </div>
+                </p>
+            </li>
+            <li>
+                GeolocationCoordinates
+                <p>
+                <div class="code">
+                    interface GeolocationCoordinates {<br>
+                    &nbsp;readonly attribute double latitude;<br>
+                    &nbsp;readonly attribute double longitude;<br>
+                    &nbsp;readonly attribute double? altitude;<br>
+                    &nbsp;readonly attribute double accuracy;<br>
+                    &nbsp;readonly attribute double? altitudeAccuracy;<br>
+                    &nbsp;readonly attribute double? heading;<br>
+                    &nbsp;readonly attribute double? speed;<br>
+                    };
+                </div>
+                </p>
+            </li>
+            <li>
+                PositionOptions
+                <p>
+                <div class="code">
+                    dictionary PositionOptions {<br>
+                    &nbsp;boolean enableHighAccuracy = false;<br>
+                    &nbsp;[Clamp] unsigned long timeout = 0xFFFFFFFF;<br>
+                    &nbsp;[Clamp] unsigned long maximumAge = 0;<br>
+                    };
+                </div>
+                </p>
+            </li>
+            <li>GeolocationPositionError
+                <p>
+                <div class="code">
+                    interface GeolocationPositionError {<br>
+                    &nbsp;const unsigned short PERMISSION_DENIED = 1;<br>
+                    &nbsp;const unsigned short POSITION_UNAVAILABLE = 2;<br>
+                    &nbsp;const unsigned short TIMEOUT = 3;<br>
+                    &nbsp;readonly attribute unsigned short code;<br>
+                    &nbsp;readonly attribute DOMString message;<br>
+                    };
+                </div>
+                </p>
+            </li>
+            <li>Geolocation
+                <p>
+                <div class="code">interface Geolocation {<br>
+                    void getCurrentPosition(PositionCallback successCallback,<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;optional
+                    PositionErrorCallback errorCallback,<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;optional
+                    PositionOptions options = {});<br>
+                    <br>
+                    long watchPosition(PositionCallback successCallback,<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;optional
+                    PositionErrorCallback errorCallback,<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;optional
+                    PositionOptions options = {});<br>
+                    <br>
+                    void clearWatch(long watchId);<br>
+                    };<br>
+                    <br>
+                    callback PositionCallback = void (GeolocationPosition position);<br>
+                    <br>
+                    callback PositionErrorCallback = void (GeolocationPositionError positionError);
+                </div>
+                </p>
+            </li>
+        </ul>
+        <br>
+        <a href="map.html">Beispiel -></a> <br>
+
+    </div>
+
+<!--    <div class="slide">-->
+<!--        <button onclick="getLocation()">Show my location</button>-->
+<!--        <button onclick="trackLocation()">Track my location</button>-->
+<!--        <button onclick="stopTracking()">Stop tracking my location</button>-->
+<!--        <button onclick="getLocationWithHighAccuracy()">Get location with high accuracy</button>-->
+<!--        <button onclick="getLocationWith0Timeout()">Get location with 0 Timeout</button>-->
+<!--        <p id="info"></p>-->
+<!--        <div id="map" class="map"></div>-->
+
+<!--        &lt;!&ndash;script-tag needs to be right before the /body-tag,&ndash;&gt;-->
+<!--        &lt;!&ndash;so all elements are loaded before the script runs. This way the script is able to find html elements&ndash;&gt;-->
+<!--        <script src="show_geoloc.js"></script>-->
+<!--    </div>-->
+</div>
+<script src="node_modules/assets/js/slide.js"></script>
 </body>
 </html>
