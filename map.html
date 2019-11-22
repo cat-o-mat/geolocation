@@ -15,11 +15,37 @@
 <div class="buttons">
     <button onclick="getLocation()">Show my location</button>
     <label class="switch">
-        <input id="chbx" type="checkbox" onchange="track_or_stop_tracking()">
+        <input id="chbx_track" type="checkbox" onchange="track_or_stop_tracking()">
         <span class="slider round"></span>
     </label>
     <button onclick="getLocationWithHighAccuracy()">Get location with high accuracy</button>
     <button onclick="getLocationWith0Timeout()">Get location with 0 Timeout</button>
+</div>
+<div id="pos_options">
+    <form>
+        <div class="input">
+            <label for="enableHighAccuracy">enableHighAccuracy</label>
+            <input id="enableHighAccuracy"
+                   type="checkbox"
+                   name="enableHighAccuracy"
+                   value="false"/>
+        </div>
+        <div class="input">
+            <label for="maximumAge">maximumAge</label>
+            <input id="maximumAge"
+                   type="number"
+                   name="maximumAge"
+                   value="0"
+                   placeholder="0"/>
+        </div>
+        <div class="input">
+            <label for="timeout">timeout</label>
+            <input id="timeout"
+                   type="number"
+                   name="timeout"
+                   placeholder="Infinity"/>
+        </div>
+    </form>
 </div>
 <div id="info_map">
     <div id="map" class="map"></div>
