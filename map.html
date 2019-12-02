@@ -29,7 +29,7 @@
                    value="false"/>
         </div>
         <div class="input">
-            <label for="maximumAge">maximumAge</label>
+            <label for="maximumAge">maximumAge in ms</label>
             <input id="maximumAge"
                    type="number"
                    name="maximumAge"
@@ -37,7 +37,7 @@
                    placeholder="0"/>
         </div>
         <div class="input">
-            <label for="timeout">timeout</label>
+            <label for="timeout">timeout in ms</label>
             <input id="timeout"
                    type="number"
                    name="timeout"
@@ -49,7 +49,12 @@
     <div id="map" class="map"></div>
     <p id="info"></p>
 </div>
-
+<form action="index.html">
+    <input type="submit" value="Zurück zum Hauptteil"/>
+</form>
+<form action="plain_coords.html">
+    <input type="submit" value="Eine einfache Konsolenausgabe"/>
+</form>
 <!--script-tag needs to be right before the /body-tag,-->
 <!--so all elements are loaded before the script runs. This way the script is able to find html elements-->
 <script src="node_modules/assets/js/show_geoloc.js"></script>
