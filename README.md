@@ -1,7 +1,9 @@
 # geolocation
 Das ist der Vortrag zu meiner Seminararbeit über die W3C Geolocation API. 
 Zum Ausführen der Anwendung index.html in einem beliebigen Browser öffnen. 
-
+Die Anwendung kann mit den Pfeiltasten (<-, ->) bedient werden.
+<br>
+<br>
 Eine Internetverbindung ist nicht notwendig, jedoch aber empfohlen, da die 
 OpenStreetMap© Karte in /map.html sonst nicht sichtbar wäre.
 
