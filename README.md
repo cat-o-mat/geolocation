@@ -1,6 +1,6 @@
 # geolocation
 Das ist der Vortrag zu meiner Seminararbeit über die W3C Geolocation API. 
-Zum Ausführen der Anwendung index.html in einem beliebigen Browser öffnen. 
+Zum Ausführen der Anwendung index.html mit einem beliebigen Browser öffnen. 
 Die Anwendung kann mit den Pfeiltasten (<-, ->) bedient werden.
 <br>
 <br>
