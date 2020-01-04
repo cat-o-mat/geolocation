@@ -6,8 +6,6 @@ Die Anwendung kann mit den Pfeiltasten (<-, ->) bedient werden.
 <br>
 Eine Internetverbindung ist nicht notwendig, jedoch aber empfohlen, da die 
 OpenStreetMap© Karte in /map.html sonst nicht sichtbar wäre.
-<br>
-https://github.com/cat-o-mat/geolocation
 
 <pre>
  __          ______   _____    _____            _                 _   _                        _____ _____
