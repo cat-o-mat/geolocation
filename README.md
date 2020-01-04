@@ -1,7 +1,8 @@
 # Seminararbeit - W3C Geolocation API
 Das ist der Vortrag zu meiner Seminararbeit über die W3C Geolocation API. 
 Zum Ausführen der Anwendung index.html mit einem beliebigen Browser öffnen. 
-Die Anwendung kann mit den Pfeiltasten (<-, ->) bedient werden.
+Die Anwendung kann mit den Pfeiltasten (<-, ->) bedient werden. 
+Bitte die scrollbaren Inhalte bachten.
 <br>
 <br>
 Eine Internetverbindung ist nicht notwendig, jedoch aber empfohlen, da die 
